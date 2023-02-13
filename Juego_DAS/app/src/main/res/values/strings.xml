@@ -1,0 +1,8 @@
+<resources>
+    <string name="app_name">Juego_DAS</string>
+    <string name="spin_button">¡Comenzar!</string>
+    <string name="puntuacion_word">Puntuación :</string>
+    <string name="score">0</string>
+    <string name="mult_word">Multiplicador :</string>
+    <string name="mult">x0.0</string>
+</resources>
