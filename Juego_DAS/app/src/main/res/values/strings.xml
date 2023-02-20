@@ -1,0 +1,22 @@
+<resources>
+    <string name="app_name">Juego_DAS</string>
+    <string name="spin_button">¡Comenzar!</string>
+    <string name="turno_word">Turno de :</string>
+    <string name="turno">Nombre</string>
+    <string name="trago_word">Número de Tragos :</string>
+    <string name="trago">0</string>
+    <string name="timer">00:00:00</string>
+    <string name="timer_button">EMPEZAR</string>
+    <string name="titulo_main">Lucky Shot</string>
+    <string name="start_button">COMENZAR</string>
+    <string name="instrucciones_button">INSTRUCCIONES</string>
+    <string name="login_button">Iniciar Sesion</string>
+    <string name="user">Introduce tu nombre de usuario</string>
+    <string name="psw">Introduce tu contraseña</string>
+    <string name="register"><u>No tengo cuenta, deseo <b>REGISTRARME</b></u></string>
+    <string name="forget_psw"><u>He olvidado mi contraseña</u></string>
+    <string name="psw_register_2">Repita su contraseña</string>
+    <string name="register_button">REGISTRARME</string>
+    <string name="add_button">AÑADIR</string>
+    <string name="nom_particicpante">Introduce los nombres de los participantes</string>º
+</resources>
