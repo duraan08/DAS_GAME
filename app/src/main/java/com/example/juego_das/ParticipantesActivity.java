@@ -32,8 +32,9 @@ public class ParticipantesActivity extends AppCompatActivity {
             listaParticipantes = savedInstanceState.getStringArrayList("participantes");
             listaPart = findViewById(R.id.participantes);
         }
+        adaptador = new ArrayAdapter<String>(ParticipantesActivity.this, android.R.layout.simple_list_item_1, listaParticipantes);
+
         if (listaParticipantes.size() != 0){
-            adaptador = new ArrayAdapter<String>(ParticipantesActivity.this, android.R.layout.simple_list_item_1, listaParticipantes);
             listaPart.setAdapter(adaptador);
         }
     }
