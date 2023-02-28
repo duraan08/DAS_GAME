@@ -2,6 +2,7 @@ package com.example.juego_das;
 
 import androidx.appcompat.app.AppCompatActivity;
 
+import android.content.ContentValues;
 import android.content.Intent;
 import android.database.Cursor;
 import android.database.sqlite.SQLiteDatabase;
@@ -41,7 +42,10 @@ public class RegistroActivity extends AppCompatActivity {
                 //El usuario no existe
                 //Insertamos la infor en la BBDD
                 bd = gestorBD.getWritableDatabase();
-                bd.rawQuery("INSERT INTO USUARIOS('Nombre', 'Password') VALUES ('" + usuario +  "','" +  pass + "')" , null);
+                ContentValues modificaciones = new ContentValues();
+                modificaciones.put("Nombre", usuario);
+                modificaciones.put("password", pass);
+                bd.insert("Usuarios", null, modificaciones);
                 bd.close();
 
                 //Una vez insertado redirigimos al Login
@@ -58,18 +62,15 @@ public class RegistroActivity extends AppCompatActivity {
     private boolean comprobarUser(String user){
         boolean existe = false;
         bd = gestorBD.getReadableDatabase();
-        try {
-            Cursor c = bd.rawQuery("SELECT Nombre FROM USUARIOS WHERE Nombre = '"+user+"'", null);
-            if (!c.getString(0).isEmpty()){
-                existe = true;
-            }
+        String[] argumento = new String[]{"unai"};
+        String[] campos = new String[]{"Nombre"};
+        Cursor c = bd.query("Usuarios", campos, "Nombre=?", argumento, null, null, null);
 
-            c.close();
-            bd.close();
+        if (c.getPosition() != -1){
+            existe = true;
         }
-        catch (Exception e){
-            e.printStackTrace();
-        }
+        c.close();
+        bd.close();
 
         return existe;
     }

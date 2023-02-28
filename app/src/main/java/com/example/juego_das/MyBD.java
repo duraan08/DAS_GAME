@@ -13,8 +13,7 @@ public class MyBD extends SQLiteOpenHelper {
 
     @Override
     public void onCreate(SQLiteDatabase sqLiteDatabase){
-        sqLiteDatabase.execSQL("CREATE TABLE USUARIOS ('Nombre' VARCHAR(30) PRIMARY KEY NOT NULL, 'Password' VARCHAR(30))");
-        //Rellenamos la bd
+        sqLiteDatabase.execSQL("CREATE TABLE Usuarios ('Nombre' VARCHAR(255) PRIMARY KEY NOT NULL, 'Password' VARCHAR(30))");
     }
 
     @Override

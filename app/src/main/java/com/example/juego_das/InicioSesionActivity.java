@@ -28,7 +28,10 @@ public class InicioSesionActivity extends AppCompatActivity {
         //Obtenemos los datos de la BD
         MyBD gestorBD = new MyBD(InicioSesionActivity.this, "Usuarios", null, 1 );
         SQLiteDatabase bd = gestorBD.getReadableDatabase();
-        Cursor c = bd.rawQuery("SELECT Nombre, Password FROM USUARIOS WHERE Nombre = '"+usuario+"' ", null);
+        String[] argumento = new String[]{usuario};
+        String[] campos = new String[] {"Nombre", "Password"};
+        Cursor c = bd.query("Usuarios", campos, "Nombre=?", argumento, null, null, null);
+
         usu = c.getString(0);
         passwd = c.getString(1);
         c.close();
