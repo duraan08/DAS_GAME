@@ -36,16 +36,16 @@ public class RegistroActivity extends AppCompatActivity {
             //Se comprueba que el usuario no existe
             if (comprobarUser(usuario)){
                 //El usuario ya existe
-                Toast.makeText(RegistroActivity.this, "El usuario ya existe", Toast.LENGTH_LONG);
+                Toast.makeText(RegistroActivity.this, "El usuario ya existe", Toast.LENGTH_LONG).show();
             }
             else{
                 //El usuario no existe
                 //Insertamos la infor en la BBDD
                 bd = gestorBD.getWritableDatabase();
                 ContentValues modificaciones = new ContentValues();
-                modificaciones.put("Nombre", usuario);
-                modificaciones.put("password", pass);
-                bd.insert("Usuarios", null, modificaciones);
+                //modificaciones.put("Nombre", usuario);
+                //modificaciones.put("Password", pass);
+                bd.execSQL("INSERT INTO Usuarios ('Nombre', 'Password') VALUES ('" + usuario + "','" + pass + "')");
                 bd.close();
 
                 //Una vez insertado redirigimos al Login
@@ -62,7 +62,7 @@ public class RegistroActivity extends AppCompatActivity {
     private boolean comprobarUser(String user){
         boolean existe = false;
         bd = gestorBD.getReadableDatabase();
-        String[] argumento = new String[]{"unai"};
+        String[] argumento = new String[]{user};
         String[] campos = new String[]{"Nombre"};
         Cursor c = bd.query("Usuarios", campos, "Nombre=?", argumento, null, null, null);
 
