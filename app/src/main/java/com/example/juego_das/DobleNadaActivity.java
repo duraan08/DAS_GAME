@@ -2,10 +2,18 @@ package com.example.juego_das;
 
 import androidx.annotation.NonNull;
 import androidx.appcompat.app.AppCompatActivity;
+import androidx.core.app.NotificationCompat;
+import androidx.core.content.ContextCompat;
 
 import android.app.AlertDialog;
+import android.app.NotificationChannel;
+import android.app.NotificationManager;
+import android.app.PendingIntent;
+import android.content.Context;
 import android.content.DialogInterface;
 import android.content.Intent;
+import android.net.Uri;
+import android.os.Build;
 import android.os.Bundle;
 import android.os.Handler;
 import android.os.SystemClock;
@@ -59,6 +67,7 @@ public class DobleNadaActivity extends AppCompatActivity {
     public void onStop(View view){
         running = false;
         activarDialog();
+        //activarNotificacion();
     }
 
     @Override
@@ -122,6 +131,28 @@ public class DobleNadaActivity extends AppCompatActivity {
             }
         });
         builder.show();
+    }
+
+    private void activarNotificacion(){
+        NotificationManager elManager = (NotificationManager) getSystemService(Context.NOTIFICATION_SERVICE);
+        NotificationCompat.Builder elBuilder = new NotificationCompat.Builder(DobleNadaActivity.this, "1");
+        if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.O){
+            NotificationChannel elCanal = new NotificationChannel("12", "DobleNada", NotificationManager.IMPORTANCE_DEFAULT);
+            elManager.createNotificationChannel(elCanal);
+        }
+
+        Intent emergencia = new Intent(Intent.ACTION_DIAL, Uri.parse("tel:112"));
+        PendingIntent emergenciaIntent = PendingIntent.getActivity(DobleNadaActivity.this, 0, emergencia, PendingIntent.FLAG_CANCEL_CURRENT | PendingIntent.FLAG_IMMUTABLE);
+
+
+        elBuilder.setSmallIcon(android.R.drawable.stat_sys_warning)
+                .setContentTitle("Mensaje Importante")
+                .setContentText("El numero de tragos es muy elevado, ¿Desea llmar a emergencias?")
+                .setVibrate(new long[] {0, 1000, 500, 1000})
+                .setAutoCancel(false)
+                .setContentIntent(emergenciaIntent);
+
+        elManager.notify(1, elBuilder.build());
     }
 
 }
