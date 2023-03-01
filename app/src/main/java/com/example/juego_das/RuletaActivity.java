@@ -46,7 +46,7 @@ public class RuletaActivity extends AppCompatActivity {
 
     //Lo que va a GIRAR
     ImageView wheel;
-    boolean girando;
+    boolean girando, dialogOn;
     TextView mult, turno;
 
     //Generar la aleatoriedad
@@ -64,6 +64,7 @@ public class RuletaActivity extends AppCompatActivity {
             premiado = savedInstanceState.getString("participante");
             girando = savedInstanceState.getBoolean("giro");
             numTirada = savedInstanceState.getInt("numTirada");
+            dialogOn = savedInstanceState.getBoolean("dialogo");
         }
 
         if (!girando){
@@ -74,6 +75,9 @@ public class RuletaActivity extends AppCompatActivity {
             turno.setText(premiado);
         }
 
+        if (dialogOn){
+            activarDialog(String.valueOf(multi));
+        }
 
         //Lo que gira
         wheel = findViewById(R.id.wheel);
@@ -166,24 +170,7 @@ public class RuletaActivity extends AppCompatActivity {
                 girando = false;
 
                 //Alerta de dialogo para participar en un doble o nada
-                AlertDialog.Builder builder = new AlertDialog.Builder(RuletaActivity.this);
-                builder.setTitle("Tu número de tragos es : " + multi_word);
-                builder.setMessage("¿Quieres jugartela a Doble o Nada?");
-                builder.setPositiveButton(" ¡Claro que sí!", new DialogInterface.OnClickListener() {
-                    @Override
-                    public void onClick(DialogInterface dialog, int which) {
-                        Intent dobleNada = new Intent(RuletaActivity.this, DobleNadaActivity.class);
-                        dobleNada.putExtra("tragos", multi_word);
-                        startActivity(dobleNada);
-                    }
-                });
-                builder.setNegativeButton("Soy un gallina ", new DialogInterface.OnClickListener() {
-                    @Override
-                    public void onClick(DialogInterface dialog, int which) {
-                        dialog.cancel();
-                    }
-                });
-                builder.show();
+                activarDialog(multi_word);
             }
 
             @Override
@@ -209,6 +196,33 @@ public class RuletaActivity extends AppCompatActivity {
         }
     }
 
+    private void activarDialog(String multi_word){
+        dialogOn = true;
+        AlertDialog.Builder builder = new AlertDialog.Builder(RuletaActivity.this);
+        builder.setTitle("Tu número de tragos es : " + multi_word);
+        builder.setMessage("¿Quieres jugartela a Doble o Nada?");
+
+        builder.setPositiveButton(" ¡Claro que sí!", new DialogInterface.OnClickListener() {
+            @Override
+            public void onClick(DialogInterface dialog, int which) {
+                dialogOn = false;
+                Intent dobleNada = new Intent(RuletaActivity.this, DobleNadaActivity.class);
+                dobleNada.putExtra("tragos", multi_word);
+                startActivity(dobleNada);
+            }
+        });
+
+        builder.setNegativeButton("Soy un gallina ", new DialogInterface.OnClickListener() {
+            @Override
+            public void onClick(DialogInterface dialog, int which) {
+                dialogOn = false;
+                dialog.cancel();
+            }
+        });
+
+        builder.show();
+    }
+
     @Override
     //Guardamos los valores para poder gestionar el giro de pnatalla
     protected void onSaveInstanceState(@NonNull Bundle outState) {
@@ -217,5 +231,6 @@ public class RuletaActivity extends AppCompatActivity {
         outState.putInt("numTirada", numTirada);
         outState.putInt("tragos", multi);
         outState.putBoolean("giro", girando);
+        outState.putBoolean("dialogo", dialogOn);
     }
 }

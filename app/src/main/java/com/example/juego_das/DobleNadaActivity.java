@@ -17,7 +17,7 @@ import java.util.Locale;
 
 public class DobleNadaActivity extends AppCompatActivity {
     int seconds;
-    boolean running;
+    boolean running, dialogOn;
     int hours, minutes, secs;
     String valor;
     TextView tiempo;
@@ -32,6 +32,7 @@ public class DobleNadaActivity extends AppCompatActivity {
         if (savedInstanceState != null){
             seconds = savedInstanceState.getInt("seconds");
             running = savedInstanceState.getBoolean("running");
+            dialogOn = savedInstanceState.getBoolean("dialogo");
         }
 
         if (running){
@@ -44,6 +45,10 @@ public class DobleNadaActivity extends AppCompatActivity {
             tiempo.setText(tmp);
         }
 
+        if (dialogOn){
+            activarDialog();
+        }
+
         runTimer();
     }
 
@@ -53,31 +58,7 @@ public class DobleNadaActivity extends AppCompatActivity {
     //Se comprueba si ha conseguido para el crono en el momento justo, y se muestra un dialogo personalizado para cada caso.
     public void onStop(View view){
         running = false;
-
-        TextView tiempo = findViewById(R.id.timer);
-        String t = tiempo.getText().toString();
-
-        AlertDialog.Builder builder = new AlertDialog.Builder(DobleNadaActivity.this);
-        builder.setTitle("Tu tiempo ha sido de : " + t);
-
-        if (t.equals("0:01:00")){
-            builder.setMessage("Te has salvado tus tragos se resetean a 0");
-        }
-        else{
-            Bundle extras = getIntent().getExtras();
-            if (extras != null){
-                valor = extras.getString("tragos");
-                valor = String.valueOf(Integer.parseInt(valor) * 2);
-            }
-            builder.setMessage("Has perdido tus tragos se duplican x2. \nTe toca beber : " + valor + " tragos");
-        }
-        builder.setPositiveButton("VOLVER", new DialogInterface.OnClickListener() {
-            @Override
-            public void onClick(DialogInterface dialog, int which) {
-                finish();
-            }
-        });
-        builder.show();
+        activarDialog();
     }
 
     @Override
@@ -86,6 +67,7 @@ public class DobleNadaActivity extends AppCompatActivity {
         super.onSaveInstanceState(outState);
         outState.putInt("seconds", seconds);
         outState.putBoolean("running", running);
+        outState.putBoolean("dialogo", dialogOn);
     }
 
     private void runTimer(){
@@ -112,6 +94,34 @@ public class DobleNadaActivity extends AppCompatActivity {
                 handler.postDelayed(this, 20);
             }
         });
+    }
+
+    private void activarDialog(){
+        dialogOn = true;
+        TextView tiempo = findViewById(R.id.timer);
+        String t = tiempo.getText().toString();
+
+        AlertDialog.Builder builder = new AlertDialog.Builder(DobleNadaActivity.this);
+        builder.setTitle("Tu tiempo ha sido de : " + t);
+
+        if (t.equals("0:01:00")){
+            builder.setMessage("Te has salvado tus tragos se resetean a 0");
+        }
+        else{
+            Bundle extras = getIntent().getExtras();
+            if (extras != null){
+                valor = extras.getString("tragos");
+                valor = String.valueOf(Integer.parseInt(valor) * 2);
+            }
+            builder.setMessage("Has perdido tus tragos se duplican x2. \nTe toca beber : " + valor + " tragos");
+        }
+        builder.setPositiveButton("VOLVER", new DialogInterface.OnClickListener() {
+            @Override
+            public void onClick(DialogInterface dialog, int which) {
+                finish();
+            }
+        });
+        builder.show();
     }
 
 }

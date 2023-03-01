@@ -29,22 +29,26 @@ public class InicioSesionActivity extends AppCompatActivity {
         MyBD gestorBD = new MyBD(InicioSesionActivity.this, "Usuarios", null, 1 );
         SQLiteDatabase bd = gestorBD.getReadableDatabase();
         String[] argumento = new String[]{usuario};
-        String[] campos = new String[] {"Nombre", "Password"};
-        Cursor c = bd.query("Usuarios", campos, "Nombre=?", argumento, null, null, null);
+        Cursor c = bd.rawQuery("SELECT * FROM Usuarios WHERE Nombre = ?", argumento);
 
-        usu = c.getString(0);
-        passwd = c.getString(1);
-        c.close();
-        bd.close();
+        if (c.moveToNext()){
+            usu = c.getString(0);
+            passwd = c.getString(1);
 
-        if (usuario.equals(usu) && pass.equals(passwd)){
-            Intent inicio = new Intent(InicioSesionActivity.this, ParticipantesActivity.class);
-            startActivity(inicio);
-            finish();
+            if (usuario.equals(usu) && pass.equals(passwd)){
+                Intent inicio = new Intent(InicioSesionActivity.this, ParticipantesActivity.class);
+                startActivity(inicio);
+                finish();
+            }
+            else{
+                Toast.makeText(InicioSesionActivity.this, "Tu usuario o contraseña son incorrectos", Toast.LENGTH_LONG).show();
+            }
         }
         else{
-            Toast.makeText(InicioSesionActivity.this, "Tu usuario o contraseña son incorrectos", Toast.LENGTH_LONG);
+            Toast.makeText(InicioSesionActivity.this, "El usuario no existe en el sistema", Toast.LENGTH_LONG).show();
         }
+        c.close();
+        bd.close();
 
     }
 

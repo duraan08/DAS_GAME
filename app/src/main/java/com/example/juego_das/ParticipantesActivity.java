@@ -1,9 +1,9 @@
 package com.example.juego_das;
 
 import androidx.annotation.NonNull;
-import androidx.appcompat.app.AlertDialog;
 import androidx.appcompat.app.AppCompatActivity;
 
+import android.app.AlertDialog;
 import android.content.DialogInterface;
 import android.content.Intent;
 import android.os.Bundle;
@@ -22,6 +22,7 @@ public class ParticipantesActivity extends AppCompatActivity {
     ArrayList<String> listaParticipantes = new ArrayList<String>();
     ArrayAdapter adaptador;
     ListView listaPart;
+    boolean dialogoOn;
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -31,17 +32,23 @@ public class ParticipantesActivity extends AppCompatActivity {
         if (savedInstanceState != null){
             listaParticipantes = savedInstanceState.getStringArrayList("participantes");
             listaPart = findViewById(R.id.participantes);
+            dialogoOn = savedInstanceState.getBoolean("dialogo");
         }
         adaptador = new ArrayAdapter<String>(ParticipantesActivity.this, android.R.layout.simple_list_item_1, listaParticipantes);
 
         if (listaParticipantes.size() != 0){
             listaPart.setAdapter(adaptador);
         }
+
+        if (dialogoOn){
+            activarDialog(listaParticipantes);
+        }
     }
 
     public void add(View view){
         EditText participante = findViewById(R.id.nom_participante);
         String participant = participante.getText().toString();
+
         //Se comprueba que el campo no este vacio
         if (!participant.equals(" ")){
             listaParticipantes.add(participant);
@@ -73,25 +80,8 @@ public class ParticipantesActivity extends AppCompatActivity {
     private void comprobarParticipantes(){
         //Si en la lista se encuentran un minimo de 2 participantes salta en Dialog para poder comenzar el juego
         if (listaParticipantes.size() >=2 && listaParticipantes.size() <=5){
-            AlertDialog.Builder builder = new AlertDialog.Builder(this);
-            builder.setMessage("¿deseas comenzar el juego?");
-
-            builder.setPositiveButton("Comenzar", new DialogInterface.OnClickListener() {
-                @Override
-                public void onClick(DialogInterface dialog, int which) {
-                    Intent juego = new Intent(ParticipantesActivity.this, RuletaActivity.class);
-                    juego.putExtra("participantes", listaParticipantes);
-                    startActivity(juego);
-                }
-            });
-
-            builder.setNegativeButton("Cancelar", new DialogInterface.OnClickListener() {
-                @Override
-                public void onClick(DialogInterface dialog, int which) {
-                    dialog.cancel();
-                }
-            });
-            builder.show();
+            //Activamos el dialog
+            activarDialog(listaParticipantes);
         }
         //Si en la lista se encuentra que hay mas de 5 participantes (maximo) se avisará y se deberá de eliminar uno de los participantes
         else if (listaParticipantes.size() > 5){
@@ -100,10 +90,34 @@ public class ParticipantesActivity extends AppCompatActivity {
         }
     }
 
+    private void activarDialog(ArrayList<String> listaParticipantes){
+        dialogoOn = true;
+        android.app.AlertDialog.Builder builder = new AlertDialog.Builder(ParticipantesActivity.this);
+        builder.setMessage("¿deseas comenzar el juego?");
+
+        builder.setPositiveButton("Comenzar", new DialogInterface.OnClickListener() {
+            @Override
+            public void onClick(DialogInterface dialog, int which) {
+                Intent juego = new Intent(ParticipantesActivity.this, RuletaActivity.class);
+                juego.putExtra("participantes", listaParticipantes);
+                startActivity(juego);
+            }
+        });
+
+        builder.setNegativeButton("Cancelar", new DialogInterface.OnClickListener() {
+            @Override
+            public void onClick(DialogInterface dialog, int which) {
+                dialog.cancel();
+            }
+        });
+        builder.show();
+    }
+
     @Override
     //Guardamos los valores para poder gestionar el giro de pantalla
     protected void onSaveInstanceState(@NonNull Bundle outState) {
         super.onSaveInstanceState(outState);
         outState.putStringArrayList("participantes", listaParticipantes);
+        outState.putBoolean("dialogo", dialogoOn);
     }
 }

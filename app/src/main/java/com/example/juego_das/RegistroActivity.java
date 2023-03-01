@@ -7,6 +7,7 @@ import android.content.Intent;
 import android.database.Cursor;
 import android.database.sqlite.SQLiteDatabase;
 import android.os.Bundle;
+import android.util.Log;
 import android.view.View;
 import android.widget.EditText;
 import android.widget.Toast;
@@ -32,7 +33,7 @@ public class RegistroActivity extends AppCompatActivity {
         String pass2 = psw2.getText().toString();
 
         //Se comprueba que ambas password coincidan y que haya introducido algo en el campo de usuario
-        if (usuario != null && pass.equals(pass2)){
+        if (!usuario.equals(" ") && pass.equals(pass2) && !pass.equals(" ")){
             //Se comprueba que el usuario no existe
             if (comprobarUser(usuario)){
                 //El usuario ya existe
@@ -43,9 +44,9 @@ public class RegistroActivity extends AppCompatActivity {
                 //Insertamos la infor en la BBDD
                 bd = gestorBD.getWritableDatabase();
                 ContentValues modificaciones = new ContentValues();
-                //modificaciones.put("Nombre", usuario);
-                //modificaciones.put("Password", pass);
-                bd.execSQL("INSERT INTO Usuarios ('Nombre', 'Password') VALUES ('" + usuario + "','" + pass + "')");
+                modificaciones.put("Nombre", usuario);
+                modificaciones.put("Password", pass);
+                bd.insert("Usuarios", null, modificaciones);
                 bd.close();
 
                 //Una vez insertado redirigimos al Login
@@ -63,11 +64,14 @@ public class RegistroActivity extends AppCompatActivity {
         boolean existe = false;
         bd = gestorBD.getReadableDatabase();
         String[] argumento = new String[]{user};
-        String[] campos = new String[]{"Nombre"};
-        Cursor c = bd.query("Usuarios", campos, "Nombre=?", argumento, null, null, null);
+        Cursor c = bd.rawQuery("SELECT * FROM Usuarios WHERE Nombre = ?", argumento);
 
-        if (c.getPosition() != -1){
+        //Se comprueba si se han recogido datos
+        if (c.moveToNext()){
             existe = true;
+        }
+        else{
+            existe = false;
         }
         c.close();
         bd.close();
