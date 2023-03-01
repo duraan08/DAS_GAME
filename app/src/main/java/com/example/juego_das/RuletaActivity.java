@@ -8,10 +8,12 @@ import androidx.annotation.NonNull;
 import androidx.appcompat.app.AppCompatActivity;
 
 import android.app.AlertDialog;
+import android.content.Context;
 import android.content.DialogInterface;
 import android.content.Intent;
 import android.net.Uri;
 import android.os.Bundle;
+import android.renderscript.ScriptGroup;
 import android.view.View;
 import android.view.animation.Animation;
 import android.view.animation.DecelerateInterpolator;
@@ -21,6 +23,12 @@ import android.widget.ImageView;
 import android.widget.TextView;
 import android.widget.Toast;
 
+import java.io.BufferedReader;
+import java.io.File;
+import java.io.IOException;
+import java.io.InputStream;
+import java.io.InputStreamReader;
+import java.io.OutputStreamWriter;
 import java.util.ArrayList;
 import java.util.Random;
 
@@ -34,7 +42,7 @@ public class RuletaActivity extends AppCompatActivity {
     final int[] sectorsDegrees = new int[sectors.length];
 
     //Indice Aleatorio
-    int randomSectorIndex, multi;
+    int randomSectorIndex, multi, numTirada;
 
     //Lo que va a GIRAR
     ImageView wheel;
@@ -55,6 +63,7 @@ public class RuletaActivity extends AppCompatActivity {
             multi = savedInstanceState.getInt("tragos");
             premiado = savedInstanceState.getString("participante");
             girando = savedInstanceState.getBoolean("giro");
+            numTirada = savedInstanceState.getInt("numTirada");
         }
 
         if (!girando){
@@ -81,6 +90,7 @@ public class RuletaActivity extends AppCompatActivity {
                 if (!girando){
                     girar();
                     girando = true;
+                    numTirada ++;
                 }
             }
         });
@@ -145,6 +155,13 @@ public class RuletaActivity extends AppCompatActivity {
                 mult.setText(multi_word);
                 turno.setText(premiado);
 
+                //Añadimos al fichero (historial_Tiradas) la informacion de la tirada
+                try {
+                    OutputStreamWriter fichero = new OutputStreamWriter(openFileOutput("historial_tiradas.txt",
+                            Context.MODE_APPEND));
+                    fichero.write("\n\nTirada numero " + numTirada + ": \nPremiado : " + premiado + " Tragos (sin x2) --> " + multi_word);
+                    fichero.close();
+                } catch (IOException e){e.printStackTrace();}
                 //Fin Giro
                 girando = false;
 
@@ -197,7 +214,7 @@ public class RuletaActivity extends AppCompatActivity {
     protected void onSaveInstanceState(@NonNull Bundle outState) {
         super.onSaveInstanceState(outState);
         outState.putString("participante", premiado);
-        System.out.println("tragos: " + multi);
+        outState.putInt("numTirada", numTirada);
         outState.putInt("tragos", multi);
         outState.putBoolean("giro", girando);
     }
