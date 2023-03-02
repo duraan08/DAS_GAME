@@ -50,7 +50,7 @@ public class ParticipantesActivity extends AppCompatActivity {
         String participant = participante.getText().toString();
 
         //Se comprueba que el campo no este vacio
-        if (!participant.equals(" ")){
+        if (!participant.isEmpty()){
             listaParticipantes.add(participant);
         }
         else{

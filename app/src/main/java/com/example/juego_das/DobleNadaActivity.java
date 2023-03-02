@@ -2,6 +2,7 @@ package com.example.juego_das;
 
 import androidx.annotation.NonNull;
 import androidx.appcompat.app.AppCompatActivity;
+import androidx.core.app.ActivityCompat;
 import androidx.core.app.NotificationCompat;
 import androidx.core.content.ContextCompat;
 
@@ -12,14 +13,17 @@ import android.app.PendingIntent;
 import android.content.Context;
 import android.content.DialogInterface;
 import android.content.Intent;
+import android.content.pm.PackageManager;
 import android.net.Uri;
 import android.os.Build;
 import android.os.Bundle;
 import android.os.Handler;
 import android.os.SystemClock;
+import android.util.Log;
 import android.view.View;
 import android.widget.TextView;
 import android.widget.Toast;
+import android.Manifest;
 
 import java.util.Locale;
 
@@ -29,6 +33,8 @@ public class DobleNadaActivity extends AppCompatActivity {
     int hours, minutes, secs;
     String valor;
     TextView tiempo;
+    Bundle extras;
+
 
 
 
@@ -37,6 +43,12 @@ public class DobleNadaActivity extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_doble_nada);
 
+        //Pedir permisos de recibir notificaciones
+        if (ContextCompat.checkSelfPermission(DobleNadaActivity.this, Manifest.permission.POST_NOTIFICATIONS)!= PackageManager.PERMISSION_GRANTED){
+            ActivityCompat.requestPermissions(DobleNadaActivity.this, new String[] {Manifest.permission.POST_NOTIFICATIONS}, 11);
+        }
+
+        //Recojo los datos necesarios para gestionar el giro
         if (savedInstanceState != null){
             seconds = savedInstanceState.getInt("seconds");
             running = savedInstanceState.getBoolean("running");
@@ -66,8 +78,16 @@ public class DobleNadaActivity extends AppCompatActivity {
     //Se comprueba si ha conseguido para el crono en el momento justo, y se muestra un dialogo personalizado para cada caso.
     public void onStop(View view){
         running = false;
+        extras = getIntent().getExtras();
+        if (extras != null){
+            valor = extras.getString("tragos");
+            int valor2 = Integer.parseInt(valor)*2;
+
+            if (valor2 >= 20){
+                activarNotificacion();
+            }
+        }
         activarDialog();
-        //activarNotificacion();
     }
 
     @Override
@@ -117,7 +137,7 @@ public class DobleNadaActivity extends AppCompatActivity {
             builder.setMessage("Te has salvado tus tragos se resetean a 0");
         }
         else{
-            Bundle extras = getIntent().getExtras();
+            extras = getIntent().getExtras();
             if (extras != null){
                 valor = extras.getString("tragos");
                 valor = String.valueOf(Integer.parseInt(valor) * 2);
@@ -135,7 +155,7 @@ public class DobleNadaActivity extends AppCompatActivity {
 
     private void activarNotificacion(){
         NotificationManager elManager = (NotificationManager) getSystemService(Context.NOTIFICATION_SERVICE);
-        NotificationCompat.Builder elBuilder = new NotificationCompat.Builder(DobleNadaActivity.this, "1");
+        NotificationCompat.Builder elBuilder = new NotificationCompat.Builder(DobleNadaActivity.this, "12");
         if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.O){
             NotificationChannel elCanal = new NotificationChannel("12", "DobleNada", NotificationManager.IMPORTANCE_DEFAULT);
             elManager.createNotificationChannel(elCanal);
@@ -144,10 +164,10 @@ public class DobleNadaActivity extends AppCompatActivity {
         Intent emergencia = new Intent(Intent.ACTION_DIAL, Uri.parse("tel:112"));
         PendingIntent emergenciaIntent = PendingIntent.getActivity(DobleNadaActivity.this, 0, emergencia, PendingIntent.FLAG_CANCEL_CURRENT | PendingIntent.FLAG_IMMUTABLE);
 
-
         elBuilder.setSmallIcon(android.R.drawable.stat_sys_warning)
                 .setContentTitle("Mensaje Importante")
-                .setContentText("El numero de tragos es muy elevado, ¿Desea llmar a emergencias?")
+                .setContentText("El numero de tragos es muy elevado, ¿Desea llamar a emergencias? Pulse en la notificación")
+                .setSubText("Si desea llamar, clicka en la notificación")
                 .setVibrate(new long[] {0, 1000, 500, 1000})
                 .setAutoCancel(false)
                 .setContentIntent(emergenciaIntent);

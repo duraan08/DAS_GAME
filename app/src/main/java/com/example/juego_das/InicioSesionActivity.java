@@ -25,35 +25,40 @@ public class InicioSesionActivity extends AppCompatActivity {
         String usuario = user.getText().toString().toLowerCase();
         String pass = psw.getText().toString();
 
-        //Obtenemos los datos de la BD
-        MyBD gestorBD = new MyBD(InicioSesionActivity.this, "Usuarios", null, 1 );
-        SQLiteDatabase bd = gestorBD.getReadableDatabase();
-        String[] argumento = new String[]{usuario};
-        Cursor c = bd.rawQuery("SELECT * FROM Usuarios WHERE Nombre = ?", argumento);
-
-        if (c.moveToNext()){
-            usu = c.getString(0);
-            passwd = c.getString(1);
-
-            if (usuario.equals(usu) && pass.equals(passwd)){
-                Intent inicio = new Intent(InicioSesionActivity.this, ParticipantesActivity.class);
-                startActivity(inicio);
-                finish();
-            }
-            else{
-                Toast.makeText(InicioSesionActivity.this, "Tu usuario o contraseña son incorrectos", Toast.LENGTH_LONG).show();
-            }
+        if (usuario.isEmpty() || pass.isEmpty()){
+            Toast.makeText(InicioSesionActivity.this, "Debe rellenar todos los campos", Toast.LENGTH_LONG).show();
         }
         else{
-            Toast.makeText(InicioSesionActivity.this, "El usuario no existe en el sistema", Toast.LENGTH_LONG).show();
-        }
-        c.close();
-        bd.close();
+            //Obtenemos los datos de la BD
+            MyBD gestorBD = new MyBD(InicioSesionActivity.this, "Usuarios", null, 1 );
+            SQLiteDatabase bd = gestorBD.getReadableDatabase();
+            String[] argumento = new String[]{usuario};
+            Cursor c = bd.rawQuery("SELECT * FROM Usuarios WHERE Nombre = ?", argumento);
 
+            if (c.moveToNext()){
+                usu = c.getString(0);
+                passwd = c.getString(1);
+
+                if (usuario.equals(usu) && pass.equals(passwd)){
+                    Intent inicio = new Intent(InicioSesionActivity.this, ParticipantesActivity.class);
+                    startActivity(inicio);
+                    finish();
+                }
+                else{
+                    Toast.makeText(InicioSesionActivity.this, "Tu usuario o contraseña son incorrectos", Toast.LENGTH_LONG).show();
+                }
+            }
+            else{
+                Toast.makeText(InicioSesionActivity.this, "El usuario no existe en el sistema", Toast.LENGTH_LONG).show();
+            }
+            c.close();
+            bd.close();
+        }
     }
 
     public void registrar(View view){
         Intent registro = new Intent(InicioSesionActivity.this, RegistroActivity.class);
         startActivity(registro);
     }
+
 }

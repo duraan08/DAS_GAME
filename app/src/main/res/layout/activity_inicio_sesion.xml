@@ -62,7 +62,7 @@
         android:layout_width="292dp"
         android:layout_height="21dp"
         android:layout_marginStart="94dp"
-        android:layout_marginTop="129dp"
+        android:layout_marginTop="168dp"
         android:layout_marginEnd="84dp"
         android:layout_marginBottom="28dp"
         android:onClick="registrar"
@@ -74,26 +74,7 @@
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintHorizontal_bias="0.545"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/forget_psw"
-        app:layout_constraintVertical_bias="1.0" />
-
-    <TextView
-        android:id="@+id/forget_psw"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_marginStart="120dp"
-        android:layout_marginTop="9dp"
-        android:layout_marginEnd="104dp"
-        android:text="@string/forget_psw"
-        android:textAlignment="center"
-        android:textColor="@color/white"
-        android:textSize="16dp"
-        app:layout_constraintBottom_toBottomOf="parent"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.476"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/login_button"
-        app:layout_constraintVertical_bias="0.079" />
+        app:layout_constraintTop_toBottomOf="@+id/login_button" />
 
     <EditText
         android:id="@+id/psw"

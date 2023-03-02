@@ -33,7 +33,7 @@ public class RegistroActivity extends AppCompatActivity {
         String pass2 = psw2.getText().toString();
 
         //Se comprueba que ambas password coincidan y que haya introducido algo en el campo de usuario
-        if (!usuario.equals(" ") && pass.equals(pass2) && !pass.equals(" ")){
+        if (!usuario.isEmpty() && pass.equals(pass2) && !pass.isEmpty()){
             //Se comprueba que el usuario no existe
             if (comprobarUser(usuario)){
                 //El usuario ya existe
