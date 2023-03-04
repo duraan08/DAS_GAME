@@ -50,13 +50,12 @@ public class ParticipantesActivity extends AppCompatActivity {
         String participant = participante.getText().toString();
 
         //Se comprueba que el campo no este vacio
-        if (!participant.equals(" ")){
+        if (!participant.isEmpty()){
             listaParticipantes.add(participant);
         }
         else{
             Toast.makeText(ParticipantesActivity.this, "No puede dejar el campo vacio", Toast.LENGTH_SHORT).show();
         }
-        participante.setText(" ");
 
         listaPart = findViewById(R.id.participantes);
         listaPart.setAdapter(adaptador);
