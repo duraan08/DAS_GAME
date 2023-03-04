@@ -33,30 +33,35 @@ public class RegistroActivity extends AppCompatActivity {
         String pass2 = psw2.getText().toString();
 
         //Se comprueba que ambas password coincidan y que haya introducido algo en el campo de usuario
-        if (!usuario.isEmpty() && pass.equals(pass2) && !pass.isEmpty()){
-            //Se comprueba que el usuario no existe
-            if (comprobarUser(usuario)){
-                //El usuario ya existe
-                Toast.makeText(RegistroActivity.this, "El usuario ya existe", Toast.LENGTH_LONG).show();
-            }
-            else{
-                //El usuario no existe
-                //Insertamos la infor en la BBDD
-                bd = gestorBD.getWritableDatabase();
-                ContentValues modificaciones = new ContentValues();
-                modificaciones.put("Nombre", usuario);
-                modificaciones.put("Password", pass);
-                bd.insert("Usuarios", null, modificaciones);
-                bd.close();
+        if (!usuario.isEmpty() && !pass.isEmpty() && !pass2.isEmpty()){
+            if (pass.equals(pass2)){
+                //Se comprueba que el usuario no existe
+                if (comprobarUser(usuario)){
+                    //El usuario ya existe
+                    Toast.makeText(RegistroActivity.this, "El usuario ya existe", Toast.LENGTH_LONG).show();
+                }
+                else{
+                    //El usuario no existe
+                    //Insertamos la infor en la BBDD
+                    bd = gestorBD.getWritableDatabase();
+                    ContentValues modificaciones = new ContentValues();
+                    modificaciones.put("Nombre", usuario);
+                    modificaciones.put("Password", pass);
+                    bd.insert("Usuarios", null, modificaciones);
+                    bd.close();
 
-                //Una vez insertado redirigimos al Login
-                Intent registro = new Intent(RegistroActivity.this, InicioSesionActivity.class);
-                startActivity(registro);
-                finish();
+                    //Una vez insertado redirigimos al Login
+                    Intent registro = new Intent(RegistroActivity.this, InicioSesionActivity.class);
+                    startActivity(registro);
+                    finish();
+                }
+            }
+            else {
+                Toast.makeText(RegistroActivity.this, "Las contraseñas no coinciden", Toast.LENGTH_LONG).show();
             }
         }
         else{
-            Toast.makeText(RegistroActivity.this, "Las contraseñas no coinciden", Toast.LENGTH_LONG);
+            Toast.makeText(RegistroActivity.this, "Debe rellenar todos los campos", Toast.LENGTH_SHORT).show();
         }
     }
 

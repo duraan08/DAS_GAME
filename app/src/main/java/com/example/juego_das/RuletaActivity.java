@@ -201,6 +201,7 @@ public class RuletaActivity extends AppCompatActivity {
         AlertDialog.Builder builder = new AlertDialog.Builder(RuletaActivity.this);
         builder.setTitle("Tu número de tragos es : " + multi_word);
         builder.setMessage("¿Quieres jugartela a Doble o Nada?");
+        builder.setCancelable(false);
 
         builder.setPositiveButton(" ¡Claro que sí!", new DialogInterface.OnClickListener() {
             @Override

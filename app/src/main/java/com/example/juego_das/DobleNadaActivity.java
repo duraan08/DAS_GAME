@@ -132,6 +132,7 @@ public class DobleNadaActivity extends AppCompatActivity {
 
         AlertDialog.Builder builder = new AlertDialog.Builder(DobleNadaActivity.this);
         builder.setTitle("Tu tiempo ha sido de : " + t);
+        builder.setCancelable(false);
 
         if (t.equals("0:01:00")){
             builder.setMessage("Te has salvado tus tragos se resetean a 0");

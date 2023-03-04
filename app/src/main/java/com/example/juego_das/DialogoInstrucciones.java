@@ -18,6 +18,7 @@ public class DialogoInstrucciones extends DialogFragment {
                 "de jugar a Doble o Nada; esa decir, se abrirá un minijuego el cual consistira en para el cronometro" +
                 "en el instante exacto de tiempo (0:01:00) si el jugador lo consigue se salva, si no sus tragos se" +
                 "duplicarán.");
+        builder.setCancelable(false);
         builder.setPositiveButton("Aceptar", new DialogInterface.OnClickListener() {
             @Override
             public void onClick(DialogInterface dialog, int which) {

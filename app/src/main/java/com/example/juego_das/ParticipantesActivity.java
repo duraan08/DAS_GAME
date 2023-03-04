@@ -50,7 +50,7 @@ public class ParticipantesActivity extends AppCompatActivity {
         String participant = participante.getText().toString();
 
         //Se comprueba que el campo no este vacio
-        if (!participant.isEmpty()){
+        if (!participant.equals(" ")){
             listaParticipantes.add(participant);
         }
         else{
@@ -94,6 +94,7 @@ public class ParticipantesActivity extends AppCompatActivity {
         dialogoOn = true;
         android.app.AlertDialog.Builder builder = new AlertDialog.Builder(ParticipantesActivity.this);
         builder.setMessage("¿deseas comenzar el juego?");
+        builder.setCancelable(false);
 
         builder.setPositiveButton("Comenzar", new DialogInterface.OnClickListener() {
             @Override
