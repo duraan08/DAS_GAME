@@ -13,7 +13,7 @@ public class DialogoMaxParticipantes extends DialogFragment {
         super.onCreateDialog(savedInstanceState);
         AlertDialog.Builder builder = new AlertDialog.Builder(getActivity());
         builder.setTitle("¡¡ALERTA!!");
-        builder.setMessage("Has alcanzado el límite de 5 jugadores, elimina uno de los añadidos");
+        builder.setMessage("Has alcanzado el límite de jugadores, elimina uno de los añadidos");
         builder.setCancelable(false);
         builder.setPositiveButton("Entendido", new DialogInterface.OnClickListener() {
             @Override

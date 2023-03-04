@@ -78,12 +78,12 @@ public class ParticipantesActivity extends AppCompatActivity {
 
     private void comprobarParticipantes(){
         //Si en la lista se encuentran un minimo de 2 participantes salta en Dialog para poder comenzar el juego
-        if (listaParticipantes.size() >=2 && listaParticipantes.size() <=5){
+        if (listaParticipantes.size() >=2 && listaParticipantes.size() <=10){
             //Activamos el dialog
             activarDialog(listaParticipantes);
         }
-        //Si en la lista se encuentra que hay mas de 5 participantes (maximo) se avisará y se deberá de eliminar uno de los participantes
-        else if (listaParticipantes.size() > 5){
+        //Si en la lista se encuentra que hay mas de 10 participantes (maximo) se avisará y se deberá de eliminar uno de los participantes
+        else if (listaParticipantes.size() > 10){
             DialogoMaxParticipantes maximo = new DialogoMaxParticipantes();
             maximo.show(getSupportFragmentManager(), "maximoParticipantes");
         }
