@@ -18,8 +18,5 @@
     <string name="psw_register_2">Repita su contraseña</string>
     <string name="register_button">REGISTRARME</string>
     <string name="add_button">AÑADIR</string>
-    <string name="nom_particicpante">Introduce los nombres de los participantes</string>
-    <string name="usu_forget">Introduce tu nombre de usuario</string>
-    <string name="mail_forget">Introduce tu mail</string>
-    <string name="button_forget">ENVIAR</string>
+    <string name="nom_particicpante">Añade los participantes</string>
 </resources>

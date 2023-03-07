@@ -7,13 +7,47 @@
     android:background="@drawable/background"
     tools:context=".MainMenuActivity">
 
+    <ImageView
+        android:id="@+id/imagen_copas"
+        android:layout_width="320dp"
+        android:layout_height="361dp"
+        android:layout_marginStart="50dp"
+        android:layout_marginTop="100dp"
+        android:layout_marginEnd="50dp"
+        android:layout_marginBottom="100dp"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.555"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent"
+        app:layout_constraintVertical_bias="0.561"
+        app:srcCompat="@drawable/copas" />
+
+    <Button
+        android:id="@+id/start_button"
+        android:layout_width="220dp"
+        android:layout_height="58dp"
+        android:layout_marginStart="100dp"
+        android:layout_marginTop="95dp"
+        android:layout_marginEnd="100dp"
+        android:layout_marginBottom="76dp"
+        android:backgroundTint="#33FF86"
+        android:onClick="comenzar"
+        android:text="@string/start_button"
+        android:textColor="@color/black"
+        android:textStyle="bold"
+        app:layout_constraintBottom_toTopOf="@+id/instrucciones_button"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.555"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/titulo_main" />
+
     <Button
         android:id="@+id/instrucciones_button"
         android:layout_width="220dp"
         android:layout_height="58dp"
-        android:layout_marginStart="95dp"
-        android:layout_marginTop="50dp"
-        android:layout_marginEnd="96dp"
+        android:layout_marginStart="100dp"
+        android:layout_marginEnd="100dp"
         android:layout_marginBottom="201dp"
         android:backgroundTint="#33FF86"
         android:onClick="instrucciones"
@@ -22,27 +56,7 @@
         android:textStyle="bold"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/start_button" />
-
-    <Button
-        android:id="@+id/start_button"
-        android:layout_width="220dp"
-        android:layout_height="58dp"
-        android:layout_marginStart="95dp"
-        android:layout_marginTop="96dp"
-        android:layout_marginEnd="96dp"
-        android:backgroundTint="#33FF86"
-        android:onClick="comenzar"
-        android:text="@string/start_button"
-        android:textColor="@color/black"
-        android:textStyle="bold"
-        app:layout_constraintBottom_toBottomOf="parent"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.0"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/titulo_main"
-        app:layout_constraintVertical_bias="0.0" />
+        app:layout_constraintStart_toStartOf="parent" />
 
     <TextView
         android:id="@+id/titulo_main"
@@ -59,19 +73,6 @@
         app:layout_constraintHorizontal_bias="0.497"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent"
-        app:layout_constraintVertical_bias="0.108" />
+        app:layout_constraintVertical_bias="0.065" />
 
-    <ImageView
-        android:id="@+id/imagen_copas"
-        android:layout_width="409dp"
-        android:layout_height="491dp"
-        android:layout_marginStart="1dp"
-        android:layout_marginEnd="1dp"
-        app:layout_constraintBottom_toBottomOf="parent"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.0"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="parent"
-        app:layout_constraintVertical_bias="1.0"
-        app:srcCompat="@drawable/copas" />
 </androidx.constraintlayout.widget.ConstraintLayout>

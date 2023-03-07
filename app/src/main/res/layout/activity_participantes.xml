@@ -14,7 +14,7 @@
         android:layout_marginStart="106dp"
         android:layout_marginTop="10dp"
         android:layout_marginEnd="106dp"
-        android:layout_marginBottom="10dp"
+        android:layout_marginBottom="20dp"
         android:src="@drawable/team"
         app:layout_constraintBottom_toTopOf="@+id/nom_participante"
         app:layout_constraintEnd_toEndOf="parent"
@@ -24,10 +24,10 @@
 
     <EditText
         android:id="@+id/nom_participante"
-        android:layout_width="369dp"
-        android:layout_height="61dp"
-        android:layout_marginStart="63dp"
-        android:layout_marginEnd="63dp"
+        android:layout_width="280dp"
+        android:layout_height="42dp"
+        android:layout_marginStart="50dp"
+        android:layout_marginEnd="50dp"
         android:backgroundTint="@color/white"
         android:ems="10"
         android:hint="@string/nom_particicpante"
@@ -36,9 +36,10 @@
         android:textColorHint="@color/white"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.838"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent"
-        app:layout_constraintVertical_bias="0.255" />
+        app:layout_constraintVertical_bias="0.258" />
 
     <Button
         android:id="@+id/add_button"
@@ -61,17 +62,20 @@
 
     <ListView
         android:id="@+id/participantes"
-        android:layout_width="390dp"
-        android:layout_height="251dp"
-        android:layout_marginBottom="4dp"
+        android:layout_width="330dp"
+        android:layout_height="220dp"
+        android:layout_marginStart="30dp"
+        android:layout_marginTop="30dp"
+        android:layout_marginEnd="30dp"
+        android:layout_marginBottom="30dp"
         android:background="#33FFD1"
         android:outlineAmbientShadowColor="@color/black"
         android:outlineSpotShadowColor="@color/black"
         android:textSize="18dp"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="1.0"
+        app:layout_constraintHorizontal_bias="0.583"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/add_button"
-        app:layout_constraintVertical_bias="0.289" />
+        app:layout_constraintVertical_bias="0.363" />
 </androidx.constraintlayout.widget.ConstraintLayout>

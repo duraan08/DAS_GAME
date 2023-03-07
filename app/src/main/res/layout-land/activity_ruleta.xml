@@ -12,7 +12,7 @@
         android:layout_width="208dp"
         android:layout_height="85dp"
         android:layout_marginStart="100dp"
-        android:layout_marginTop="11dp"
+        android:layout_marginTop="5dp"
         android:layout_marginEnd="100dp"
         android:backgroundTint="#33FFD1"
         android:text="@string/spin_button"
@@ -22,8 +22,7 @@
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintHorizontal_bias="0.0"
         app:layout_constraintStart_toEndOf="@+id/wheel"
-        app:layout_constraintTop_toTopOf="parent"
-        app:layout_constraintVertical_bias="0.782" />
+        app:layout_constraintTop_toBottomOf="@+id/trago_word" />
 
     <ImageView
         android:id="@+id/wheel"
@@ -35,7 +34,6 @@
         app:layout_constraintEnd_toStartOf="@+id/spin_button"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent"
-        app:layout_constraintVertical_bias="0.807"
         app:srcCompat="@drawable/wheel" />
 
     <TextView
@@ -43,8 +41,8 @@
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_marginStart="88dp"
-        android:layout_marginTop="72dp"
-        android:layout_marginBottom="19dp"
+        android:layout_marginTop="20dp"
+        android:layout_marginBottom="10dp"
         android:text="@string/turno_word"
         android:textColor="@color/white"
         android:textSize="20sp"
@@ -53,7 +51,7 @@
         app:layout_constraintEnd_toStartOf="@+id/turno"
         app:layout_constraintStart_toEndOf="@+id/wheel"
         app:layout_constraintTop_toTopOf="parent"
-        app:layout_constraintVertical_bias="0.0" />
+        app:layout_constraintVertical_bias="0.761" />
 
     <TextView
         android:id="@+id/turno"
@@ -61,21 +59,24 @@
         android:layout_height="wrap_content"
         android:layout_marginTop="72dp"
         android:layout_marginEnd="53dp"
+        android:layout_marginBottom="70dp"
         android:text="@string/turno"
         android:textColor="@color/white"
         android:textSize="20sp"
         android:textStyle="bold"
-        app:layout_constraintBottom_toTopOf="@+id/spin_button"
+        app:layout_constraintBottom_toTopOf="@+id/trago_word"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toEndOf="@+id/turno_word"
         app:layout_constraintTop_toTopOf="parent"
-        app:layout_constraintVertical_bias="0.0" />
+        app:layout_constraintVertical_bias="0.529" />
 
     <TextView
         android:id="@+id/trago_word"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_marginStart="88dp"
+        android:layout_marginTop="10dp"
+        android:layout_marginEnd="10dp"
         android:layout_marginBottom="24dp"
         android:text="@string/trago_word"
         android:textColor="@color/white"
@@ -83,23 +84,23 @@
         android:textStyle="bold"
         app:layout_constraintBottom_toTopOf="@+id/spin_button"
         app:layout_constraintEnd_toStartOf="@+id/trago"
-        app:layout_constraintStart_toEndOf="@+id/wheel" />
+        app:layout_constraintStart_toEndOf="@+id/wheel"
+        app:layout_constraintTop_toBottomOf="@+id/turno_word" />
 
     <TextView
         android:id="@+id/trago"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_marginEnd="50dp"
-        android:layout_marginBottom="5dp"
         android:text="@string/trago"
         android:textColor="@color/white"
         android:textSize="20sp"
         android:textStyle="bold"
-        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintBottom_toTopOf="@+id/spin_button"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintHorizontal_bias="0.585"
         app:layout_constraintStart_toEndOf="@+id/trago_word"
         app:layout_constraintTop_toTopOf="parent"
-        app:layout_constraintVertical_bias="0.452" />
+        app:layout_constraintVertical_bias="0.68" />
 
 </androidx.constraintlayout.widget.ConstraintLayout>

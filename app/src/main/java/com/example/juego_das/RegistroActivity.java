@@ -51,8 +51,6 @@ public class RegistroActivity extends AppCompatActivity {
                     bd.close();
 
                     //Una vez insertado redirigimos al Login
-                    Intent registro = new Intent(RegistroActivity.this, InicioSesionActivity.class);
-                    startActivity(registro);
                     finish();
                 }
             }
