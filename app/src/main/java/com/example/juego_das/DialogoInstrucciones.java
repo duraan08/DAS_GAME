@@ -13,11 +13,13 @@ public class DialogoInstrucciones extends DialogFragment {
         super.onCreateDialog(savedInstanceState);
         AlertDialog.Builder builder = new AlertDialog.Builder(getActivity());
         builder.setTitle("Instrucciones");
-        builder.setMessage("Cualquier Jugador hace girar la ruleta, De manera aleatoria la app elegirá a" +
-                "uno de los participantes y le asiganrá los tragos que le correspondan. El elegido tiene opción" +
-                "de jugar a Doble o Nada; esa decir, se abrirá un minijuego el cual consistira en para el cronometro" +
-                "en el instante exacto de tiempo (0:01:00) si el jugador lo consigue se salva, si no sus tragos se" +
-                "duplicarán.");
+        builder.setMessage("1. El usuario principal debe Iniciar sesión o registrarse en caso de que no tenga una cuenta." +
+                "\n\n2. Se deben añadir los participantes del juego (mín 2 y máx 10)" +
+                "\n\n3. Cualquier jugador puede hacer girar la ruleta, esta al pararse elegirá uno de los participantes de forma" +
+                " aleatoria y le asignará unos tragos." +
+                "\n\n4. El jugador elegido, tiene opción de jugar un minijuego para evitar beber los tragos asigandos." +
+                " Este trata de parar el cronometro en el momento exacto de (0:01:00) si lo consigue se libra de los tragos" +
+                " si no se duplicarán.");
         builder.setCancelable(false);
         builder.setPositiveButton("Aceptar", new DialogInterface.OnClickListener() {
             @Override
