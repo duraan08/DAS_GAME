@@ -20,7 +20,8 @@ import java.util.ArrayList;
 public class ParticipantesActivity extends AppCompatActivity {
 
     ArrayList<String> listaParticipantes = new ArrayList<String>();
-    ArrayAdapter adaptador;
+    int[] imagenes = {R.drawable.usuario};
+    ListViewAdapter elAdaptador;
     ListView listaPart;
     boolean dialogoOn;
     @Override
@@ -34,10 +35,11 @@ public class ParticipantesActivity extends AppCompatActivity {
             listaPart = findViewById(R.id.participantes);
             dialogoOn = savedInstanceState.getBoolean("dialogo");
         }
-        adaptador = new ArrayAdapter<String>(ParticipantesActivity.this, android.R.layout.simple_list_item_1, listaParticipantes);
+
+        elAdaptador = new ListViewAdapter(getApplicationContext(), listaParticipantes, imagenes);
 
         if (listaParticipantes.size() != 0){
-            listaPart.setAdapter(adaptador);
+            listaPart.setAdapter(elAdaptador);
         }
 
         if (dialogoOn){
@@ -58,7 +60,7 @@ public class ParticipantesActivity extends AppCompatActivity {
         }
 
         listaPart = findViewById(R.id.participantes);
-        listaPart.setAdapter(adaptador);
+        listaPart.setAdapter(elAdaptador);
 
         listaPart.setOnItemLongClickListener(new AdapterView.OnItemLongClickListener() {
             @Override
@@ -68,7 +70,7 @@ public class ParticipantesActivity extends AppCompatActivity {
                 //Mensaje emergente
                 Toast.makeText(ParticipantesActivity.this, "Participante Eliminado Correctamente", Toast.LENGTH_LONG).show();
                 //Actualiza la lista
-                adaptador.notifyDataSetChanged();
+                elAdaptador.notifyDataSetChanged();
                 comprobarParticipantes();
                 return true;
             }
