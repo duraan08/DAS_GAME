@@ -99,6 +99,7 @@ public class DobleNadaActivity extends AppCompatActivity {
         outState.putBoolean("dialogo", dialogOn);
     }
 
+    // Codigo obtenido de https://youtu.be/wiW_LiAWwfY Autor : TechnoGeek
     private void runTimer(){
         TextView timer = findViewById(R.id.timer);
         Handler handler = new Handler();
