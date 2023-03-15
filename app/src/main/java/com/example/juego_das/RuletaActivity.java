@@ -76,7 +76,7 @@ public class RuletaActivity extends AppCompatActivity {
         }
 
         if (dialogOn){
-            activarDialog(String.valueOf(multi));
+            activarDialog(String.valueOf(multi), premiado);
         }
 
         //Lo que gira
@@ -170,7 +170,7 @@ public class RuletaActivity extends AppCompatActivity {
                 girando = false;
 
                 //Alerta de dialogo para participar en un doble o nada
-                activarDialog(multi_word);
+                activarDialog(multi_word, premiado);
             }
 
             @Override
@@ -196,10 +196,10 @@ public class RuletaActivity extends AppCompatActivity {
         }
     }
 
-    private void activarDialog(String multi_word){
+    private void activarDialog(String multi_word, String jugadorSeleccionado){
         dialogOn = true;
         AlertDialog.Builder builder = new AlertDialog.Builder(RuletaActivity.this);
-        builder.setTitle("Tu número de tragos es : " + multi_word);
+        builder.setTitle("Jugador Seleccionado : " + jugadorSeleccionado + "\nTu número de tragos es : " + multi_word);
         builder.setMessage("¿Quieres jugartela a Doble o Nada?");
         builder.setCancelable(false);
 
