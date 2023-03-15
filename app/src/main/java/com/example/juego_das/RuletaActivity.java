@@ -169,8 +169,12 @@ public class RuletaActivity extends AppCompatActivity {
                 //Fin Giro
                 girando = false;
 
-                //Alerta de dialogo para participar en un doble o nada
-                activarDialog(multi_word, premiado);
+                //Se comprueba si se le han asigando al menos 1 trago para que salte el dialog
+                if (multi > 0){
+                    //Alerta de dialogo para participar en un doble o nada
+                    activarDialog(multi_word, premiado);
+                }
+
             }
 
             @Override
