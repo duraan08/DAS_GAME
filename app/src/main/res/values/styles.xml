@@ -1,0 +1,8 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <style name="TemaLuckyShot" parent="Theme.AppCompat">
+        <item name="colorPrimary">#b179f0</item>
+        <item name="colorAccent">@color/white</item>
+        <item name="android:fontFamily">sans-serif-medium</item>
+    </style>
+</resources>
