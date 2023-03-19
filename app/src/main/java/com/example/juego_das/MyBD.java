@@ -11,6 +11,7 @@ public class MyBD extends SQLiteOpenHelper {
         super(context,name,factory,version);
     }
 
+    //Creamos la tabla SQL
     @Override
     public void onCreate(SQLiteDatabase sqLiteDatabase){
         sqLiteDatabase.execSQL("CREATE TABLE Usuarios ('Nombre' VARCHAR(255) PRIMARY KEY NOT NULL, 'Password' VARCHAR(30))");

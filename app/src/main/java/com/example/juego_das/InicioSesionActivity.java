@@ -35,6 +35,7 @@ public class InicioSesionActivity extends AppCompatActivity {
             String[] argumento = new String[]{usuario};
             Cursor c = bd.rawQuery("SELECT * FROM Usuarios WHERE Nombre = ?", argumento);
 
+            //Comprobamos si ha recogido el valor solicitado
             if (c.moveToNext()){
                 usu = c.getString(0);
                 passwd = c.getString(1);

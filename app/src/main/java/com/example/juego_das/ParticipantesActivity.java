@@ -28,8 +28,8 @@ public class ParticipantesActivity extends AppCompatActivity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_participantes);
-        Button add_button = findViewById(R.id.add_button);
 
+        //Obtenemos los valores guardados para gestionar el giro
         if (savedInstanceState != null){
             listaParticipantes = savedInstanceState.getStringArrayList("participantes");
             listaPart = findViewById(R.id.participantes);

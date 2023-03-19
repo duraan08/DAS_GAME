@@ -55,6 +55,7 @@ public class DobleNadaActivity extends AppCompatActivity {
             dialogOn = savedInstanceState.getBoolean("dialogo");
         }
 
+        //Comprobar si estaba corriendo el contador antes del girar el movil
         if (running){
             tiempo = (TextView) findViewById(R.id.timer);
             hours = seconds / 3600;
@@ -65,6 +66,7 @@ public class DobleNadaActivity extends AppCompatActivity {
             tiempo.setText(tmp);
         }
 
+        //Comprobar si el dialogo estaba activo antes de cambiar la orientación del movil
         if (dialogOn){
             activarDialog();
         }
@@ -104,6 +106,7 @@ public class DobleNadaActivity extends AppCompatActivity {
         TextView timer = findViewById(R.id.timer);
         Handler handler = new Handler();
 
+        //Se obtienen los valores necesarios para el timer
         handler.post(new Runnable() {
             @Override
             public void run() {
@@ -120,7 +123,7 @@ public class DobleNadaActivity extends AppCompatActivity {
                 else{
                     timer.setText("0:00:00");
                 }
-
+                //Se aumenta la frecuencia (Para acelerar la cuenta)
                 handler.postDelayed(this, 20);
             }
         });
