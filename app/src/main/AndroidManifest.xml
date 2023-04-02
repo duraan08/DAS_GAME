@@ -3,6 +3,8 @@
     xmlns:tools="http://schemas.android.com/tools">
 
     <uses-permission android:name="android.permission.POST_NOTIFICATIONS" />
+    <uses-feature android:name="android.hardware.camera" android:required="true"></uses-feature>
+
     <application
         android:allowBackup="true"
         android:dataExtractionRules="@xml/data_extraction_rules"
@@ -13,6 +15,9 @@
         android:supportsRtl="true"
         android:theme="@style/TemaLuckyShot"
         tools:targetApi="31">
+        <activity
+            android:name=".CamaraActivity"
+            android:exported="false" />
         <activity
             android:name=".DobleNadaActivity"
             android:exported="false" />

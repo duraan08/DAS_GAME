@@ -19,4 +19,6 @@
     <string name="register_button">REGISTRARME</string>
     <string name="add_button">AÑADIR</string>
     <string name="nom_particicpante">Añade los participantes</string>
+    <string name="btnCamara">Abrir Camara</string>
+    <string name="btnEnviarImg">Enviar Imagen</string>
 </resources>
